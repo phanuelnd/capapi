@@ -46,7 +46,7 @@ router.delete("/:id", async (req, res)=>{
         try{
 
      await post.delete();
-            res.status(200).json("Blog is now deleted");
+            res.status(200).json("Blog is now deleted.");
         }catch(err){res.status(500).json(err)}
 
     }
