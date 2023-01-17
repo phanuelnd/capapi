@@ -2,22 +2,25 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Post = require("../models/Post");
 
+const multer = require("multer");
+
+const auth = require("../middleware/authenticate");
+
 //Create new Blog
-router.post("/", async (req, res)=>{
+router.post("/", auth, async (req, res)=>{
    const newPost = new Post(req.body);
    try{
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
 
-   }catch(err){res.status(500).json(err)}
-
-   
+   }catch(err){res.status(500).json(err)}   
 } );
+
 
 
 //Update the blog
 
-router.put("/:id", async (req, res)=>{
+router.put("/:id", auth, async (req, res)=>{
     try{
         const post = await Post.findById(req.params.id);
         if(post.username === req.body.username){
@@ -39,7 +42,7 @@ res.status(401).json("You can update only your blog");
 
 //delete the blog
 
-router.delete("/:id", async (req, res)=>{
+router.delete("/:id",auth, async (req, res)=>{
     try{
         const post = await Post.findById(req.params.id);
         if(post.username === req.body.username){
@@ -75,7 +78,7 @@ router.get(":/id", async (req, res) => {
 
 // get all blogs 
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     const username = req.query.user;
     const catName = req.query.cat;
     try{

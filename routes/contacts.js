@@ -38,12 +38,12 @@ res.status(401).json("You can delete only your message");
 });
 
 
-// GET Message
+// GET a single message
 
 router.get(":/id", async (req, res) => {
     try{
-        const contact = await Contact.findById(req.params.id);
-        res.status(200).json(contact);
+        const message = await Contact.findById(req.params.id);
+        res.status(200).json(message);
 
     }
         catch (err) {
