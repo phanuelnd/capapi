@@ -1,15 +1,18 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const Contact = require("../models/Contact");
-
+const {contactSchema} = require("../helpers/validation_schema");
 //Create new message
 router.post("/", async (req, res)=>{
    const newContact = new Contact(req.body);
    try{
+  
+   const result = await contactSchema.validateAsync(req.body)
+   console.log(result);
     const savedContact = await newContact.save();
     res.status(200).json(savedContact);
 
-   }catch(err){res.status(500).json(err)}
+   }catch(err){res.status(500).json(err); console.log(err)}
 
    
 } );
