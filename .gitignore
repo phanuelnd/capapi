@@ -1,4 +1,4 @@
 node_modules
-.env
 .gitignore
+.env
 package.json
