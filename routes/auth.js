@@ -2,11 +2,16 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const {userSchema} = require("../helpers/validation_schema");
+
  
 //register user
 
 router.post("/register", async (req, res)=>{
     try{
+        const result = await userSchema.validateAsync(req.body)
+   console.log(result);
+   
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(req.body.password, salt);
         const newUser = new User({
