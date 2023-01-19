@@ -14,14 +14,16 @@ const PostSchema = Joi.object({
     categories: Joi.string().min(4).required()
 })
 
-// const userSchema = Joi.object({
-//     username: Joi.string().required(),
-//     email: Joi.string().min(15).required(),
-//     password: Joi.string().required()
-// })
+const userSchema = Joi.object({
+    username: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required()
+})
+
 
 module.exports ={
     contactSchema,
-    PostSchema
+    PostSchema,
+    userSchema
 
 }
