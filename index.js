@@ -37,3 +37,5 @@ app.use("/api/contacts",contactRoute);
 app.listen("5000", ()=>{
     console.log("Backend is running.");
 });
+
+module.exports = app

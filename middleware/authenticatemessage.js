@@ -9,7 +9,7 @@ const authenticate = (req, res, next) => {
     }
     catch(error){
         res.json({
-            message: 'You have no access for the blogs unless you are an admin!'
+            message: 'You have no access for viewing any message unless you are an admin!'
     })
     }
 }
