@@ -1,4 +1,4 @@
+# Secret file
 node_modules
-.gitignore
 .env
 package.json
