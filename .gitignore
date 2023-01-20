@@ -1,4 +1,4 @@
 # Secret file
 node_modules
-.env
 package.json
+.env
