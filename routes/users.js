@@ -3,6 +3,8 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
 const {userSchema} = require("../helpers/validation_schema");
+const Viewer = require("../models/Viewer");
+const auth = require("../middleware/authenticate");
 
 
 //update
@@ -67,5 +69,22 @@ router.get(":/id", async (req, res) => {
             res.status(500).json(err);
     }
 });
+//get all users 
+
+router.get("/", async(req, res)=>{
+    try{ const comm = await User.find();
+ res.status(500).json(comm); 
+ 
+     }catch(err){res.status(500).json(err)}
+ });
+
+ //get all Viewers 
+
+router.get("/viewers", auth, async(req, res)=>{
+    try{ const comm = await Viewer.find();
+ res.status(500).json(comm); 
+ 
+     }catch(err){res.status(500).json(err)}
+ });
 
 module.exports = router;

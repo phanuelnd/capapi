@@ -20,10 +20,16 @@ const userSchema = Joi.object({
     password: Joi.string().min(6).required()
 })
 
+const viewerSchema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required()
+})
 
 module.exports ={
     contactSchema,
     PostSchema,
-    userSchema
+    userSchema,
+    viewerSchema
 
 }

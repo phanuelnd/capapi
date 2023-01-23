@@ -65,6 +65,31 @@ res.status(401).json("You can delete only your blog");
 }
       
 });
+//add a comment to the blogs 
+router.post("/:id", async (req, res)=>{
+const newComment= (req, res) => {
+    let id = req.params.id;
+     let newComment = req.body.comments;
+    const comment = {
+    text: newComment,
+    date: new Date()
+     } 
+    blogs.findById(id, (err, data) => {
+     if(err || !data || !newComment) {
+     return res.json({message: "blog doesn't exist.", idd: id}); 
+    } else { 
+
+    data.comments.push(comment);
+
+    data.save(err => {
+     if (err) { 
+    return res.json({message: "Comment failed to add.", error:err}); 
+    }
+     return res.json(data); 
+    })
+    }  
+ })
+}});
 
 
 // GET Blog
@@ -82,7 +107,7 @@ router.get(":/id", async (req, res) => {
 
 // get all blogs 
 
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
     const username = req.query.user;
     const catName = req.query.cat;
     try{

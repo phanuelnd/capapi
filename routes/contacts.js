@@ -4,7 +4,7 @@ const Contact = require("../models/Contact");
 const {contactSchema} = require("../helpers/validation_schema");
 const auth = require("../middleware/authenticatemessage");
 //Create new message
-router.post("/", auth, async (req, res)=>{
+router.post("/", async (req, res)=>{
    const newContact = new Contact(req.body);
    try{
   
@@ -21,7 +21,7 @@ router.post("/", auth, async (req, res)=>{
 
 //deleting the message
 
-router.delete("/:id",auth,async (req, res)=>{
+router.delete("/:id",async (req, res)=>{
     try{
         const contact = await Contact.findById(req.params.id);
         if(contact.username === req.body.username){
