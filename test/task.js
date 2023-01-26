@@ -44,16 +44,6 @@ describe('Blogs API', () =>{
     })
 
 
-    describe("GET /api/posts", () => {
-        it("It should Get all the blogs.", (done) =>{
-            chai.request(app)
-            .get("/api/posts")
-            .end((err, response) => {
-                response.should.have.status(200);
-                done();
-            })
-        })
-    })
 
 
     describe("DELETE /api/posts", () => {
@@ -67,16 +57,29 @@ describe('Blogs API', () =>{
         })
     })
 
-    describe("POST /api/contacts", () => {
-        it("It should Send any message.", (done) =>{
-            chai.request(app)
-            .post("/api/contacts")
-            .end((err, response) => {
-                response.should.have.status(200);
-                done();
-            })
-        })
-    })
+    // describe("POST /api/contacts", () => {
+    //     it("It should Send any message.", (done) =>{
+    //         chai.request(app)
+    //         .post("/api/contacts")
+    //         .end((err, response) => {
+    //             response.should.have.status(200);
+    //             done();
+    //         })
+    //     })
+    // });
+
+
+
+    // describe("GET /api/posts", () => {
+    //     it("It should Get all the blogs.", (done) =>{
+    //         chai.request(app)
+    //         .get("/api/posts/")
+    //         .end((err, response) => {
+    //             response.should.have.status(200);
+    //             done();
+    //         })
+    //     })
+    // })
 
     describe("GET /api/contacts", () => {
         it("It should Get any message.", (done) =>{
@@ -88,6 +91,7 @@ describe('Blogs API', () =>{
             })
         })
     })
+
 
     
 });

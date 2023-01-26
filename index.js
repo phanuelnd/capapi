@@ -10,8 +10,17 @@ const categoryRoute = require("./routes/categories");
 const commentRoute = require("./routes/comments");
 const contactRoute = require("./routes/contacts");
 const multer = require("multer");
-
 const bodyParser = require('body-parser');
+
+
+const swaggerDoc = require("swagger-ui-express");
+const swaggerDocumentation = require("./helpers/documentation");
+
+
+app.use("/documentation", swaggerDoc.serve)
+app.use("/documentation", swaggerDoc.setup(swaggerDocumentation))
+
+
 
 dotenv.config();
 app.use(express.json());
