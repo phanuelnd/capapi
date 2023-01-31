@@ -100,6 +100,7 @@ router.get(":/id", async (req, res) => {
 
 // get all blogs 
 
+
 router.get("/", async (req, res) => {
     const username = req.query.user;
     const catName = req.query.cat;
