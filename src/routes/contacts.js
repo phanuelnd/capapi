@@ -2,8 +2,9 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Contact = require("../models/Contact");
 const {contactSchema} = require("../helpers/validation_schema");
+const auth = require("../middleware/authenticatemessage");
 //Create new message
-router.post("/", async (req, res)=>{
+router.post("/", auth, async (req, res)=>{
    const newContact = new Contact(req.body);
    try{
   
@@ -20,7 +21,7 @@ router.post("/", async (req, res)=>{
 
 //deleting the message
 
-router.delete("/:id", async (req, res)=>{
+router.delete("/:id",auth,async (req, res)=>{
     try{
         const contact = await Contact.findById(req.params.id);
         if(contact.username === req.body.username){
@@ -43,9 +44,9 @@ res.status(401).json("You can delete only your message");
 
 // GET a single message
 
-router.get(":/id", async (req, res) => {
+router.get(":/id",auth, async (req, res) => {
     try{
-        const message = await Contact.findById(req.params.id);
+        const message = await Contact.findById(req.params.name);
         res.status(200).json(message);
 
     }
@@ -54,9 +55,10 @@ router.get(":/id", async (req, res) => {
     }
 });
 
+
 // get all message 
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     const name = req.query.user;
     try{
         let contacts;
