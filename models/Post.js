@@ -21,7 +21,8 @@ const PostSchema = new mongoose.Schema(
     categories:{
         type:Array,
        required:false
-    }
+    },
+    comment:[{text: String, date: {type:String, default: new Date()}}]
    
 },
 {timestamps:true}
