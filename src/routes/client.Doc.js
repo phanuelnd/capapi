@@ -1,18 +1,18 @@
-const user = [
+const viewers = [
+    
     {
-     "_id": "63d1501020fc45383479edb0",
-      "username": "kaka",
-      "email": "phazo@gmail.com",
-      "password": "$2a$10$4o2aE.McmyzbxuK3nDP03eCY7mtw1HBktTINt4YnzvIegO.9Mww2S",
-      "profilePic": "0780922562",
-      "createdAt": "2023-01-25T15:51:44.106Z",
-      "updatedAt": "2023-01-25T15:51:44.106Z",
-      "__v": 0,
-     
+        "_id": "63d2e7023c71a4e752ea154a",
+        "name": "Phanuizo",
+        "email": "phazoo10@gmail.com",
+        "password": "$2b$10$09sfuWu7GV4Prq/VEWMLteIaZKOsOPPk75d0tm9ZGtVzj8lr1esU.",
+        "createdAt": "2023-01-26T20:48:02.010Z",
+        "updatedAt": "2023-01-26T20:48:02.010Z",
+        "__v": 0
     }
 ]
+
 const listAllUsers = {
-    tags: ['User'],
+    tags: ['Viewer'],
     description: "List of all Users",
     responses: {
         200: {
@@ -22,8 +22,8 @@ const listAllUsers = {
                     schema: {
                         type: "object",
                         example: {
-                            count: 1,
-                            user,
+           viewers
+                            
                         }
                     }
                 }
@@ -34,19 +34,19 @@ const listAllUsers = {
 
 // create a user
 
-const createUser = {
-    tags: ['User'],
-    description: "Create a New user",
+const register = {
+    tags: ['Viewer'],
+    description: "Create a New Client",
     requestBody:{
         content:{
             "application/json": {
                 schema: {
                     type: "object",
                     properties: {
-                        username:{
+                        name:{
                             type:"string",
-                            description:"the username of the user",
-                            example:"kaka"
+                            description:"the name of the client",
+                            example:"Phazo"
                         },
                         email:{
                             type:"string",
@@ -58,13 +58,7 @@ const createUser = {
                             description:"the password",
                             example:"123456"
                         },
-                      
-                        profilePic: {
-                            type:"string",
-                            description:"profile pic url",
-                            example:"desktop"
-                        },
-                    
+                                       
                      
                     }
                 }
@@ -78,7 +72,7 @@ const createUser = {
                 "application/json": {
                     schema: {
                         type: "object",
-                        example: user
+                        example: viewers
                     }
                 }
             }
@@ -88,18 +82,18 @@ const createUser = {
 //login
 
 const Login = {
-    tags:['User'],
-    description:"User Login",
+    tags:['Viewer'],
+    description:"Clients Login",
     requestBody:{
         content:{
             "application/json":{
                 schema:{
                     type:"object",
                     properties:{
-                        username:{
+                        email:{
                             type:"string",
                             description:"Your email",
-                            example:"rugano"
+                            example:"rugano@gmail.com"
                         },
                         password:{
                             type:"string",
@@ -119,7 +113,7 @@ const Login = {
                     type:"object",
                     example:{
                         status:"success",
-                        user
+                        viewers
                     }
                 }
             }
@@ -130,10 +124,9 @@ const Login = {
 
 // update profile
 
-
 const updateUser = {
-    tags:['User'],
-    description:"Update profile of the user",
+    tags:['Viewer'],
+    description:"Update profile of the client",
     security: [
         {
           token: [],
@@ -154,10 +147,10 @@ const updateUser = {
                 schema:{
                     type:"object",
                     properties:{
-                        username:{
+                        userId:{
                             type:"string",
-                            description:"the username of the user",
-                            example:"phanuel23"
+                            description:"User Id of the client",
+                            example:"63d01eef296f28432dedc35f"
                         },
                         email:{
                             type:"string",
@@ -165,10 +158,10 @@ const updateUser = {
                             example:"phanuel@gmail.com"
                         },
 
-                        profilePic:{
+                        name:{
                             type:"string",
                             description:"the image of user",
-                            example:"desktop/phazo.jpeg"
+                            example:"Phanuel"
                         },
 
                         password:{
@@ -196,40 +189,71 @@ const updateUser = {
         }
     }
 }
+//delete a user
+
+const deleteUser = {
+    tags:['Viewer'],
+    description:"Delete a client",
+      security: [
+          {
+            token: [],
+          },
+        ],
+    parameters:[
+        {
+            name:"id",
+            in:"path",
+            description:"user id",
+            type:"string"
+        }
+    ],
+    responses:{
+        200:{
+            description:"Query OK",
+            content:{
+                 "application/json":{
+                    type:'object',
+                    example:{
+                        status:"Done",
+                        viewers,
+                    }
+                 }
+            }
+        }
+    }
+}
 
 //creating a blog post
 
-
-
-const createBlog = {
-    tags: ['User'],
-    description: "Create a New blog",
+const sendaMessage = {
+    tags: ['Viewer'],
+    description: "Send a New message",
     requestBody:{
         content:{
             "application/json": {
                 schema: {
                     type: "object",
                     properties: {
-                        username:{
+                        name:{
                             type:"string",
-                            description:"the username of the user",
-                            example:"kaka"
+                            description:"the Name of the client",
+                            example:"Phanuel"
                         },
                         email:{
                             type:"string",
                             description:"the email of the user",
                             example:"phazo@gmail.com"
                         },
-                        password:{
+                        phone:{
                             type:"string",
-                            description:"the password",
-                            example:"123456"
+                            description:"the Phone number of the client",
+                            example:"0788888888"
                         },
                       
-                        profilePic: {
+                        message: {
                             type:"string",
-                            description:"profile pic url",
-                            example:"desktop"
+                            description:"a Message",
+                            example:"ese usigaye uba ahehe"
                         },
                     
                      
@@ -245,30 +269,41 @@ const createBlog = {
                 "application/json": {
                     schema: {
                         type: "object",
-                        example: user
+                        example: viewers
                     }
                 }
             }
         }
     }
 }
-const userRouteDoc = {
-    "/api/users":{
-    get: listAllUsers,
-    // post: createUser,
-},
 
-"/api/auth/register":{
-    post: createUser,
-},
 
-"/api/auth/login":{
-    post: Login,
-},
+const clientRouteDoc = {
 
-"/api/users/{id}": {
-    put:updateUser
+    "/api/viewers/register":{
+        post: register,
+    },
+
+    "/api/viewers/login": {
+        post:Login
+    },
+
+    "/api/viewers/update/{id}":{
+        put: updateUser,
+        }, 
+
+     "/api/viewers/delete/{id}":{
+     delete: deleteUser,
+     }, 
+
+    "/api/contacts/sendamessage":{
+        post: sendaMessage,
+    },
+
+    // "/api/posts/all":{
+    //     get: allMessage,
+    // },
+
 }
 
-}
-module.exports  = userRouteDoc;
+module.exports = clientRouteDoc

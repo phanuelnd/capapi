@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
-const UserSchema = new Schema(
+const ViewerSchema = new Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
-      unique: true,
+      unique: false,
     },
     email: {
       type: String,
@@ -15,12 +15,8 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    profilePic: {
-      type: String,
-      default: "",
-    },
   },
   { timestamps: true }
 );
 
-export default model("User", UserSchema);
+export default model("Viewer", ViewerSchema);

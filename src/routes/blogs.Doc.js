@@ -13,6 +13,35 @@ const blog = [
     "__v": 0
     }
   ]
+
+  const message = [
+    {
+                       
+         "_id": "63d01d08296f28432dedc353",
+         "name": "Fazo",
+         "email": "fazo@gmail.com",
+        "phone": "7878787878",
+        "message": "I wanna give you a job",
+
+        "createdAt": "2023-01-24T18:01:44.670+00:00",
+       "updatedAt": "2023-01-24T18:01:44.670+00:00",
+       "__v":0
+    }
+]
+
+const viewers = [
+    
+        {
+            "_id": "63d2e7023c71a4e752ea154a",
+            "name": "Phanuizo",
+            "email": "phazoo10@gmail.com",
+            "password": "$2b$10$09sfuWu7GV4Prq/VEWMLteIaZKOsOPPk75d0tm9ZGtVzj8lr1esU.",
+            "createdAt": "2023-01-26T20:48:02.010Z",
+            "updatedAt": "2023-01-26T20:48:02.010Z",
+            "__v": 0
+        }
+    
+]
   const listAllBlogs = {
       tags:['Blogs'],
       description:"List of all the Blogs",
@@ -31,6 +60,44 @@ const blog = [
           }
       }
   }
+
+  const allMessage = {
+    tags:['Blogs'],
+    description:"List of all messages",
+    responses:{
+        200:{
+            description:"Query OK",
+            content:{
+                 "application/json":{
+                    type:'object',
+                    example:{
+                        status:"Done",
+                        message
+                    }
+                 }
+            }
+        }
+    }
+}
+
+const allViewers = {
+    tags:['Blogs'],
+    description:"List of all Client users",
+    responses:{
+        200:{
+            description:"Query OK",
+            content:{
+                 "application/json":{
+                    type:'object',
+                    example:{
+                        status:"Done",
+                        viewers
+                    }
+                 }
+            }
+        }
+    }
+}
   // post  nwew blog
   const newBlog = {
       tags:['Blogs'],
@@ -200,31 +267,43 @@ const blog = [
   }
   const blogsRouteDoc = {
 
-      "/api/posts":{
-        get: listAllBlogs,
+    "/api/posts/new":{   //creeartes a new blog
+        post: newBlog,
+       },
+
+       "/api/posts/edit/{id}":{ //update a blog 
+        put: editBlog,
     },
+
+      "/api/posts/all":{
+        get: listAllBlogs,//list all the blogs
+        },
+
+        "/api/contacts/all":{   //get all the message
+            get: allMessage,
+           },
+
+
+           "/api/users/viewers":{   //creeartes a new blog
+            get: allViewers,
+           },
+           
  
-   
+    //    "/api/posts/all/{id}":{
+    //       get: getSingleBlog,//get single blog by Id 
+    //   },
 
-      "/api/posts/{id}":{
-          get: getSingleBlog,
-      },
+    //   "/api/posts?user=Kababa": //get single blog by Author
+    //   {
+    //     get: getSingleBlog,
+    //   },
 
-      "/api/posts?user=Kababa":
-      {
-        get: getSingleBlog,
-    },
-
-    "/api/posts":
-    {
-      get: listAllBlogs,
-  },
-  "/api/posts":{
-    post: newBlog,
-},
-      "/api/posts/{id}":{
+     
+      "/api/posts/delete/{id}":{ //delete a blog 
           delete: deleteBlog,
       },
+
+
 
   }
   module.exports  = blogsRouteDoc;

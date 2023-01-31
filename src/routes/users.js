@@ -1,71 +1,73 @@
-const router = require("express").Router();
-const User = require("../models/User");
-const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
-const {userSchema} = require("../helpers/validation_schema");
+import { Router } from "express";
 
+import {
+  username as _username,
+  findByIdAndUpdate,
+  findById,
+  findByIdAndDelete,
+  find,
+} from "../models/User";
+import Post from "../models/Post";
+import { genSalt, hash } from "bcrypt";
+import { userSchema } from "../validations/validation_schema";
+import { find as _find } from "../models/Viewer";
+import auth from "../middleware/authenticate";
+import { updateUser } from "../controllers/user.controller";
+
+const userRouter = new Router();
 
 //update
-router.put("/:id", async (req, res)=>{
-    
-    if(req.body.userId === req.params.id){
+userRouter.put("/edit/:id", updateUser);
 
-        if(req.body.password){
-            const salt = await bcrypt.genSalt(10);
-            req.body.password = await bcrypt.hash(req.body.password, salt);
-        }
-    
-    try{ 
-        await Post.deleteMany({username:User.username})
-       const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-       },{new:true});
-       res.status(200).json(updatedUser);
-    }
-    catch(err){
+//delete the user
+
+userRouter.delete("/delete/:id", async (req, res) => {
+  if (req.body.userId === req.params.id) {
+    try {
+      const user = await findById(req.params.id);
+      try {
+        await findByIdAndDelete(req.params.id);
+        res.status(200).json("User has been deleted");
+      } catch (err) {
         res.status(500).json(err);
+      }
+    } catch (err) {
+      res.status(404).json("User not found!");
     }
-}
-    else{
-        res.status(401).json("You can only update your account.");
-
-    }
-} );
-
-
-//delete the user 
-
-router.delete("/:id", async (req, res)=>{
-    if(req.body.userId === req.params.id){
-        try{
-    const user =  await User.findById(req.params.id);
-    try{
-       await User.findByIdAndDelete(req.params.id);
-       res.status(200).json("User has been deleted");
-    }
-    catch(err){
-        res.status(500).json(err);
-    }
- } catch(err){
-    res.status(404).json("User not found!")
- }
-}
-    else{
-        res.status(401).json("You can delete only your account");
-
-    }
+  } else {
+    res.status(401).json("You can delete only your account");
+  }
 });
 // GET SOME USER
-router.get(":/id", async (req, res) => {
-    try{
-        const user = await User.findById(req.params.id);
-        const { passwpord, ...others} = user._doc;
-        res.status(200).json(others);
+userRouter.get(":/id", async (req, res) => {
+  try {
+    const user = await findById(req.params.id);
+    const { passwpord, ...others } = user._doc;
+    res.status(200).json(others);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+//get all users
 
-    }
-        catch (err) {
-            res.status(500).json(err);
-    }
+userRouter.get("/all", async (req, res) => {
+  try {
+    const comm = await find();
+    res.status(500).json(comm);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-module.exports = router;
+//get all Viewers
+
+userRouter.get("/viewers", auth, async (req, res) => {
+  try {
+    const comm = await _find();
+    res.status(500).json(comm);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+export default userRouter;
