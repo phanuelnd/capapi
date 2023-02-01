@@ -1,7 +1,7 @@
 import { Router } from "express";
-import User, { findOne } from "../models/User";
+import User from "../models/User";
+import { sign } from "jsonwebtoken";
 import { genSalt, hash, compare } from "bcrypt";
-
 const router = new Router();
 
 //register user
@@ -25,18 +25,39 @@ router.post("/register", async (req, res) => {
 //Do Login
 router.post("/login", async (req, res) => {
   try {
-    const user = await findOne({ username: req.body.username });
+    const user = await User.findOne({ email: req.body.email });
     !user && res.status(400).json("Wrong Credentials");
 
     const validated = await compare(req.body.password, user.password);
     !validated && res.status(400).json("Wrong Credentials");
 
+    const token = sign({ user }, "mikey");
+
     const { password, ...others } = await user._doc;
 
-    res.status(200).json(others);
+    res.status(200).json({others, token});
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
+
+// router.post("/login", async (req, res) => {
+//   try {
+//     const user = await User.findOne({ email: req.body.email });
+//     !user && res.status(400).json("Wrong Credentials or user not found");
+
+//     const validated = await compare(req.body.password, user.password);
+//     !validated && res.status(400).json("Wrong Credentials  or user not found");
+
+//     const token = sign({ user }, "mikey");
+
+//     const { password, ...others } = await user._doc;
+
+//     res.status(200).json({ others, token });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 export default router;

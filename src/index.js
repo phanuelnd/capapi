@@ -11,14 +11,13 @@ import swaggerDocumentation from "./docs/documentation";
 import indexRouter from "./routes";
 
 const app = express();
-
+app.use(json());
 app.use("/documentation", serve);
 app.use("/documentation", setup(swaggerDocumentation));
 
 app.use("/api", indexRouter);
 
 config();
-app.use(json());
 
 connect(process.env.MONGO_URL, {
   useNewUrlParser: true,

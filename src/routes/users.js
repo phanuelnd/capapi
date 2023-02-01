@@ -13,10 +13,11 @@ import { userSchema } from "../validations/validation_schema";
 import { find as _find } from "../models/Viewer";
 import auth from "../middleware/authenticate";
 import { updateUser } from "../controllers/user.controller";
+import User from "../models/User";
 
 const userRouter = new Router();
 
-//update
+//update a user
 userRouter.put("/edit/:id", updateUser);
 
 //delete the user
@@ -24,9 +25,9 @@ userRouter.put("/edit/:id", updateUser);
 userRouter.delete("/delete/:id", async (req, res) => {
   if (req.body.userId === req.params.id) {
     try {
-      const user = await findById(req.params.id);
+      const user = await User.findById(req.params.id);
       try {
-        await findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id);
         res.status(200).json("User has been deleted");
       } catch (err) {
         res.status(500).json(err);
@@ -41,7 +42,7 @@ userRouter.delete("/delete/:id", async (req, res) => {
 // GET SOME USER
 userRouter.get(":/id", async (req, res) => {
   try {
-    const user = await findById(req.params.id);
+    const user = await User.findById(req.params.id);
     const { passwpord, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
@@ -52,7 +53,7 @@ userRouter.get(":/id", async (req, res) => {
 
 userRouter.get("/all", async (req, res) => {
   try {
-    const comm = await find();
+    const comm = await User.find();
     res.status(500).json(comm);
   } catch (err) {
     res.status(500).json(err);
@@ -63,8 +64,8 @@ userRouter.get("/all", async (req, res) => {
 
 userRouter.get("/viewers", auth, async (req, res) => {
   try {
-    const comm = await _find();
-    res.status(500).json(comm);
+    const comm = await Viewer._find();
+    res.status(500).json(comm);// check here if the error exists for the viewers
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authRouter from "./auth";
 import postRouter from "./posts";
+import contactRoute from "./contacts";
 import userRouter from "./users";
 import categoryRouter from "./categories";
 import viewerRouter from "./viewers";
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
 router.use("/auth", authRouter);
 router.use("/users", userRouter);
 router.use("/posts", postRouter);
+router.use("/contacts", contactRoute);
 router.use("/categories", categoryRouter);
 router.use("/viewers", viewerRouter);
 router.use("/comment", commentRouter);

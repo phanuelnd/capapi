@@ -19,8 +19,6 @@ const router = new Router();
 
 router.post("/register", async (req, res) => {
   try {
-    const result = await viewerSchema.validateAsync(req.body);
-    console.log(result);
 
     const salt = await genSalt(10);
     const hashedPass = await hash(req.body.password, salt);
@@ -39,7 +37,7 @@ router.post("/register", async (req, res) => {
 //Do Login
 router.post("/login", async (req, res) => {
   try {
-    const user = await findOne({ email: req.body.email });
+    const user = await Viewer.findOne({ email: req.body.email });
     !user && res.status(400).json("Wrong Credentials");
 
     const validated = await compare(req.body.password, user.password);
@@ -64,8 +62,8 @@ router.put("/update/:id", async (req, res) => {
     }
 
     try {
-      await deleteMany({ name: _name });
-      const updatedUser = await findByIdAndUpdate(
+      await Viewer.deleteMany({ name: _name });
+      const updatedUser = await Viewer.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
@@ -86,9 +84,9 @@ router.put("/update/:id", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   if (req.body.userId === req.params.id) {
     try {
-      const user = await findById(req.params.id);
+      const user = await Viewer.findById(req.params.id);
       try {
-        await findByIdAndDelete(req.params.id);
+        await Viewer.findByIdAndDelete(req.params.id);
         res.status(200).json("User has been deleted");
       } catch (err) {
         res.status(500).json(err);
