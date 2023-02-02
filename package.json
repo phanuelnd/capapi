@@ -4,6 +4,7 @@
   "description": "Repository of my APIs Backend of my portofolio",
   "main": "index.js",
   "scripts": {
+    
     "build": "babel ./src/index.js -d build",
       "start": "babel-node src/index.js",
        "dev" : "nodemon --exec npm start" 
