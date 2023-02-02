@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./src/index.js -d build",
-    "start": "nodemon --exec babel-node src/index.js"
+      "start": "babel-node src/index.js",
+       "dev" : "nodemon --exec npm start" 
+   
   },
+
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phanuelnd/capapi.git"
