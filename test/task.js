@@ -3,7 +3,7 @@ import chaiHttp from "chai-http";
 import app from "../src/index";
 
 //Assertion style
-
+process.env.NODE_ENV = "test";
 should();
 use(chaiHttp);
 let loginToken;
@@ -25,9 +25,23 @@ describe("Authentication", async () => {
   });
 });
 
-describe("Blogs API", async () => {
+// describe("Users ", async () => {
+//   // Get All Posts
+//   describe("Get /api/users/all", () => {
+//     it("It should fetch all users", (done) => {
+//       request(app)
+//         .get("/api/users/all")
+//         .end((err, response) => {
+//           response.should.have.status(200);
+//           done();
+//         });
+//     });
+//   });
+// });
+
+describe("Blogs ", async () => {
   // Get All Posts
-  describe("Get /api/posts/a;;", () => {
+  describe("Get /api/posts/all", () => {
     it("It should fetch all posts", (done) => {
       request(app)
         .get("/api/posts/all")
@@ -71,3 +85,18 @@ describe("Blogs API", async () => {
   //   });
   // });
 });
+
+// describe("Comment ", async () => {
+//   // Get All Posts
+//   describe("Get /api/comment/all", () => {
+//     it("It should fetch all posts", (done) => {
+//       request(app)
+//         .get("/api/comment/")
+//         .end((err, response) => {
+//           response.should.have.status(200);
+//           done();
+//         });
+//     });f
+
+//   });
+// });
