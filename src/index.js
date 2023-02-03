@@ -23,7 +23,11 @@ connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(console.log("Connected to MongoDB"))
+  .then(() => {
+    if (process.env.NODE_ENV !== "test") {
+      console.log("Connected to MongoDB");
+    }
+  })
   .catch((err) => console.log(err));
 
 // const storage = multer.diskStorage({
@@ -35,7 +39,9 @@ connect(process.env.MONGO_URL, {
 // app.post("/api/upload",upload.single("avatar"),(req,res)=>{res.status(200).json("File has been uploaded ");});
 
 app.listen("5000", () => {
-  console.log("Backend is running.");
+  if (process.env.NODE_ENV !== "test") {
+    console.log("Backend is running.");
+  }
 });
 
 export default app;

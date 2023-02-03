@@ -2,3 +2,5 @@
 node_modules
 package.json
 .env
+.nyc_output
+coverage

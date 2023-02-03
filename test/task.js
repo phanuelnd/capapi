@@ -1,18 +1,17 @@
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-let app = require("../index");
+import { should, use, request } from "chai";
+import chaiHttp from "chai-http";
+import app from "../src/index";
 
 //Assertion style
 
-chai.should();
-chai.use(chaiHttp);
+should();
+use(chaiHttp);
 
 describe("Blogs API", () => {
   //test Post
   describe("POST /api/posts", () => {
     it("It should Post all the tasks", (done) => {
-      chai
-        .request(app)
+      request(app)
         .get("/api/posts/")
         .end((err, response) => {
           response.should.have.status(200);
@@ -23,8 +22,7 @@ describe("Blogs API", () => {
 
   describe("PUT /api/posts", () => {
     it("It should Update all the data", (done) => {
-      chai
-        .request(app)
+      request(app)
         .put("/api/posts/id")
         .end((err, response) => {
           response.should.have.status(200);
@@ -35,8 +33,7 @@ describe("Blogs API", () => {
 
   describe("PUT /api/posts", () => {
     it("It should Update all the data", (done) => {
-      chai
-        .request(app)
+      request(app)
         .put("/api/posts/id")
         .end((err, response) => {
           response.should.have.status(200);

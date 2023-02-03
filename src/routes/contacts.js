@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const Contact = require("../models/Contact");
-const { contactSchema } = require("../helpers/validation_schema");
+import { contactSchema } from "../validations/validation_schema";
 const auth = require("../middleware/authenticatemessage");
 //Create new message
 router.post("/", auth, async (req, res) => {
