@@ -4,11 +4,11 @@
   "description": "Repository of my APIs Backend of my portofolio",
   "main": "index.js",
   "scripts": {
-    
+
     "build": "babel ./src/index.js -d build",
       "start": "babel-node src/index.js",
-       "dev" : "nodemon --exec npm start" 
-   
+       "dev" : "nodemon --exec npm start"
+
   },
 
 
@@ -33,9 +33,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
     "multer": "^1.4.5-lts.1",
-    "swagger-ui-express": "^4.6.0"
-  },
-  "devDependencies": {
+    "swagger-ui-express": "^4.6.0",
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
@@ -44,7 +42,10 @@
     "@babel/register": "^7.17.0",
     "@babel/runtime": "^7.17.2",
     "babel-loader": "^8.2.3",
-    "babel-plugin-istanbul": "^6.1.1",
+    "babel-plugin-istanbul": "^6.1.1"
+  },
+  "devDependencies": {
+
     "nodemon": "^2.0.20"
   }
 }
