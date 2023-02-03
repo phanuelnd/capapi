@@ -26,22 +26,24 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(400).json("Wrong Credentials");
-
+    if (!user) {
+      res.status(400).json("Wrong Credentials");
+    }
     const validated = await compare(req.body.password, user.password);
-    !validated && res.status(400).json("Wrong Credentials");
+    if (!validated) {
+      return res.status(400).json("Wrong Credentials");
+    }
 
     const token = sign({ user }, "mikey");
 
     const { password, ...others } = await user._doc;
 
-    res.status(200).json({others, token});
+    res.status(200).json({ others, token });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 
 // router.post("/login", async (req, res) => {
 //   try {

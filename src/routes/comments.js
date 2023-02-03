@@ -7,9 +7,9 @@ router.post("/", async (req, res) => {
   const newComment = new Comment(req.body);
   try {
     const savedComment = await newComment.save();
-    res.status(500).json(savedComment);
+    res.status(200).send(savedComment);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 
@@ -19,9 +19,10 @@ router.get("/", async (req, res) => {
   try {
     const comm = await Comment.find();
 
-    res.status(500).json(comm);
+    res.status(200).send(comm);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+    res.status(500).send(err);
   }
 });
 
@@ -33,12 +34,12 @@ router.delete("/:id", async (req, res) => {
       const user = await Comment.findById(req.params.id);
       try {
         await Comment.findByIdAndDelete(req.params.id);
-        res.status(200).json("Comment has been deleted");
+        res.status(200).send("Comment has been deleted");
       } catch (err) {
-        res.status(500).json(err);
+        res.status(500).send(err);
       }
     } catch (err) {
-      res.status(404).json("Comment doesn't found!");
+      res.status(404).send("Comment doesn't found!");
     }
   } else {
     res.status(401).json("You can delete only your comment");
