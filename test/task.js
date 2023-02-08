@@ -98,27 +98,7 @@ describe("Blogs ", async () => {
           done();
         });
     });
-  });
-  // describe("PUT /api/posts", () => {
-  //   it("It should Update all the data", (done) => {
-  //     request(app)
-  //       .put("/api/posts/id")
-  //       .end((err, response) => {
-  //         response.should.have.status(200);
-  //         done();
-  //       });
-  //   });
-  // });
-  // describe("PUT /api/posts", () => {
-  //   it("It should Update all the data", (done) => {
-  //     request(app)
-  //       .put("/api/posts/id")
-  //       .end((err, response) => {
-  //         response.should.have.status(200);
-  //         done();
-  //       });
-  //   });
-  // });
+  });  
 });
 
 describe("Contact ", async () => {
@@ -136,16 +116,4 @@ describe("Contact ", async () => {
     expect(res).to.have.status(200);
   });
 });
-// describe("Comment ", async () => {
-//   // Get All Posts
-//   describe("Get /api/comment/all", () => {
-//     it("It should fetch all comments", (done) => {
-//       request(app)
-//         .get("/api/comment")
-//         .end((err, response) => {
-//           response.should.have.status(200);
-//           done();
-//         });
-//     });
-//   });
-// });
+

@@ -6,7 +6,7 @@ import auth from "../middleware/authenticate";
 const router = new Router();
 
 //Create new Blog
-router.post("/new", auth, async (req, res) => {
+router.post("/new",/* auth,*/ async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();

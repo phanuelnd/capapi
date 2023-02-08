@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const Contact = require("../models/Contact");
-import { contactSchema } from "../validations/validation_schema";
+
+// import { contactSchema } from "../validations/validation_schema";
 const auth = require("../middleware/authenticatemessage");
+
 //Create new message
-router.post("/", auth, async (req, res) => {
+
+router.post("/new", async (req, res) => {
   const newContact = new Contact(req.body);
 
   try {
@@ -18,7 +21,7 @@ router.post("/", auth, async (req, res) => {
 
 //deleting the message
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/delete/:id", auth, async (req, res) => {
   try {
     const contact = await findById(req.params.id);
     if (contact.username === req.body.username) {
@@ -38,7 +41,7 @@ router.delete("/:id", auth, async (req, res) => {
 
 // GET a single message
 
-router.get(":/id", auth, async (req, res) => {
+router.get(":/id", async (req, res) => {
   try {
     const message = await Contact.findById(req.params.name);
     res.status(200).json(message);
@@ -49,7 +52,7 @@ router.get(":/id", auth, async (req, res) => {
 
 // get all message
 
-router.get("/", auth, async (req, res) => {
+router.get("/allmessages", auth, async (req, res) => {
   const name = req.query.user;
   try {
     let contacts;
@@ -63,5 +66,4 @@ router.get("/", auth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 export default router;

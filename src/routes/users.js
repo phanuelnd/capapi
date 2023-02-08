@@ -59,7 +59,6 @@ userRouter.get("/:id", async (req, res) => {
   }
 });
 //get all users
-//get all Viewers
 
 userRouter.get("/viewers", auth, async (req, res) => {
   try {

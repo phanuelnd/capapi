@@ -1,4 +1,5 @@
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/phanuelnd/capapi)
+[![Actions Status](https://github.com/phanuelnd/capapi/workflows/Node.js CI/badge.svg)](https://github.com/phanuelnd/capapi/Node.js CI)
 
 # capapi
 

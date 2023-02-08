@@ -14,6 +14,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPass,
+      userType: req.body.userType || 'user'
     });
 
     const user = await newUser.save();
@@ -27,7 +28,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      res.status(400).json("Wrong Credentials");
+      return res.status(400).json("Wrong Credentials");
     }
     const validated = await compare(req.body.password, user.password);
     if (!validated) {
