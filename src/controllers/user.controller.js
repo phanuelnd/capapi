@@ -1,3 +1,5 @@
+import { genSalt, hash } from "bcrypt";
+
 export const updateUser = async (req, res) => {
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
@@ -7,7 +9,7 @@ export const updateUser = async (req, res) => {
 
     try {
       await Post.deleteMany({ username: _username });
-      const updatedUser = await findByIdAndUpdate(
+      const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,

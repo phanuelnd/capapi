@@ -40,7 +40,16 @@ userRouter.delete("/delete/:id", async (req, res) => {
   }
 });
 // GET SOME USER
-userRouter.get(":/id", async (req, res) => {
+
+userRouter.get("/all", async (req, res) => {
+  try {
+    const comm = await User.find();
+    res.status(200).send(comm);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+userRouter.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { passwpord, ...others } = user._doc;
@@ -50,22 +59,12 @@ userRouter.get(":/id", async (req, res) => {
   }
 });
 //get all users
-
-userRouter.get("/all", async (req, res) => {
-  try {
-    const comm = await User.find();
-    res.status(500).json(comm);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 //get all Viewers
 
 userRouter.get("/viewers", auth, async (req, res) => {
   try {
     const comm = await Viewer._find();
-    res.status(500).json(comm);// check here if the error exists for the viewers
+    res.status(500).json(comm); // check here if the error exists for the viewers
   } catch (err) {
     res.status(500).json(err);
   }
