@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 
 //all categories
 
-router.get("/", async (req, res) => {
+router.get("/allsubs", async (req, res) => {
   try {
     const cats = await find();
 
