@@ -3,7 +3,7 @@ const User = require("../models/User");
 const Contact = require("../models/Contact");
 
 // import { contactSchema } from "../validations/validation_schema";
-const auth = require("../middleware/authenticatemessage");
+// const auth = require("../middleware/authenticatemessage");
 
 //Create new message
 
@@ -21,7 +21,7 @@ router.post("/new", async (req, res) => {
 
 //deleting the message
 
-router.delete("/delete/:id", auth, async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const contact = await findById(req.params.id);
     if (contact.username === req.body.username) {
@@ -52,7 +52,7 @@ router.get(":/id", async (req, res) => {
 
 // get all message
 
-router.get("/allmessages", auth, async (req, res) => {
+router.get("/allme", async (req, res) => {
   const name = req.query.user;
   try {
     let contacts;
