@@ -1,6 +1,13 @@
-const router = require("express").Router();
-const User = require("../models/User");
-const Contact = require("../models/Contact");
+
+
+import { Router } from "express";
+import auth from "../middleware/authenticate";
+import User from "../models/User"
+import Contact from "../models/Contact";
+const router = new Router();
+
+// const User = require("../models/User");
+// const Contact = require("../models/Contact");
 
 // import { contactSchema } from "../validations/validation_schema";
 // const auth = require("../middleware/authenticatemessage");
@@ -23,7 +30,7 @@ router.post("/new", async (req, res) => {
 
 router.delete("/delete/:id", async (req, res) => {
   try {
-    const contact = await findById(req.params.id);
+    const contact = await Contact.findById(req.params.id);
     if (contact.username === req.body.username) {
       try {
         await contact.delete();
