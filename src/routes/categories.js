@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
 router.get("/allsubs", async (req, res) => {
   try {
-    const cats = await find();
+    const cats = await Category.find();
 
     res.status(500).json(cats);
   } catch (err) {

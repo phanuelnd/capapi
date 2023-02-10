@@ -6,7 +6,7 @@ import auth from "../middleware/authenticate";
 const router = new Router();
 
 //Create new Blog
-router.post("/new",/* auth,*/ async (req, res) => {
+router.post("/new", auth, async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
@@ -21,7 +21,7 @@ router.post("/new",/* auth,*/ async (req, res) => {
 router.put("/edit/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+
       try {
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
@@ -32,9 +32,7 @@ router.put("/edit/:id", auth, async (req, res) => {
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(401).json("You can update only your blog");
-    }
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -85,18 +83,7 @@ router.post("/:id", async (req, res) => {
   };
 });
 
-// GET Blog
 
-// router.get(":/id", async (req, res) => {
-//     try{
-//         const post = await Post.findById(req.params.id);
-//         res.status(200).json(post);
-
-//     }
-//         catch (err) {
-//             res.status(500).json(err);
-//     }
-// });
 // get a blog by ID
 
 router.get(":/id", async (req, res) => {

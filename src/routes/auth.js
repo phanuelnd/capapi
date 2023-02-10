@@ -7,7 +7,7 @@ const router = new Router();
 //register user
 
 router.post("/register", async (req, res) => {
-  try {
+
     const salt = await genSalt(10);
     const hashedPass = await hash(req.body.password, salt);
     const newUser = new User({
@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
       password: hashedPass,
       userType: req.body.userType || 'user'
     });
-
+    try {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (err) {
@@ -46,21 +46,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     const user = await User.findOne({ email: req.body.email });
-//     !user && res.status(400).json("Wrong Credentials or user not found");
-
-//     const validated = await compare(req.body.password, user.password);
-//     !validated && res.status(400).json("Wrong Credentials  or user not found");
-
-//     const token = sign({ user }, "mikey");
-
-//     const { password, ...others } = await user._doc;
-
-//     res.status(200).json({ others, token });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 export default router;

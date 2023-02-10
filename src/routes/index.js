@@ -5,7 +5,7 @@ import contactRoute from "./contacts";
 import userRouter from "./users";
 import categoryRouter from "./categories";
 import viewerRouter from "./viewers";
-import commentRouter from "./comments";
+
 
 const router = new Router();
 
@@ -20,6 +20,5 @@ router.use("/posts", postRouter);
 router.use("/contacts", contactRoute);
 router.use("/categories", categoryRouter);
 router.use("/viewers", viewerRouter);
-router.use("/comment", commentRouter);
 
 export default router;

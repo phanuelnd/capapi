@@ -23,7 +23,7 @@ userRouter.put("/edit/:id", updateUser);
 //delete the user
 
 userRouter.delete("/delete/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
+
     try {
       const user = await User.findById(req.params.id);
       try {
@@ -35,9 +35,7 @@ userRouter.delete("/delete/:id", async (req, res) => {
     } catch (err) {
       res.status(404).json("User not found!");
     }
-  } else {
-    res.status(401).json("You can delete only your account");
-  }
+
 });
 // GET SOME USER
 

@@ -55,7 +55,6 @@ router.post("/login", async (req, res) => {
 
 //Update user's information
 router.put("/update/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await genSalt(10);
       req.body.password = await hash(req.body.password, salt);
@@ -74,15 +73,12 @@ router.put("/update/:id", async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  } else {
-    res.status(401).json("You can only update your account information.");
-  }
+
 });
 
 //delete the viewer
 
 router.delete("/delete/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
     try {
       const user = await Viewer.findById(req.params.id);
       try {
@@ -94,9 +90,6 @@ router.delete("/delete/:id", async (req, res) => {
     } catch (err) {
       res.status(404).json("User not found!");
     }
-  } else {
-    res.status(401).json("You can delete only your account");
-  }
 });
 
 export default router;
