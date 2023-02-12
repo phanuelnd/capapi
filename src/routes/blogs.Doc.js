@@ -279,7 +279,7 @@ const allViewers = {
         get: listAllBlogs,//list all the blogs
         },
 
-        "/api/contacts/all":{   //get all the message
+        "/api/contacts/allme":{   //get all the message
             get: allMessage,
            },
 
