@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/phanuelnd/capapi/badge.svg?branch=main)](https://coveralls.io/github/phanuelnd/capapi?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/phanuelnd/capapi/badge.svg?branch=develop)](https://coveralls.io/github/phanuelnd/capapi?branch=develop)
 
 # capapi
 
