@@ -1,3 +1,5 @@
+{<img src="https://coveralls.io/repos/github/phanuelnd/capapi/badge.svg?branch=develop" alt="Coverage Status" />}[https://coveralls.io/github/phanuelnd/capapi?branch=develop]
+
 # capapi
 
 Repository of my APIs Backend of my portofolio
