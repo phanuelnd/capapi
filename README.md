@@ -1,4 +1,4 @@
-{<img src="https://coveralls.io/repos/github/phanuelnd/capapi/badge.svg?branch=develop" alt="Coverage Status" />}[https://coveralls.io/github/phanuelnd/capapi?branch=develop]
+{<img src="https://coveralls.io/repos/github/phanuelnd/capapi/badge.svg?branch=develop" alt="Coverage Status" />}
 
 # capapi
 
