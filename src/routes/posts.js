@@ -18,34 +18,26 @@ router.post("/new", async (req, res) => {
 
 //Update the blog
 
-router.put("/edit/:id",auth,async (req, res) => {
-  
-    const post = await Post.findById(req.params.id);
+router.put("/edit/:id", async (req, res) => {
 
- const updatedPost = await Post.findByIdAndUpdate(
-          req.params.id,
-          { $set: req.body },
-          { new: true }
-        );
-        res.status(200).json(updatedPost);
+  const post = await Post.findById(req.params.id);
+
+  const updatedPost = await Post.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    { new: true }
+  );
+  res.status(200).json(updatedPost);
 });
 
 //delete the blog
 
-router.delete("/delete/:id",auth, async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
-    
-        await post.delete();
-        res.status(200).json("Blog is now deleted");
-      
-    } else {
-      res.status(401).json("You can delete only your blog");
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.delete("/delete/:id", async (req, res) => {
+
+  const post = await Post.findById(req.params.id);
+
+  await post.delete();
+  res.status(200).json("Blog is now deleted");
 });
 // get all blogs
 
